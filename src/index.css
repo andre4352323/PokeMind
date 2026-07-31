@@ -1,0 +1,318 @@
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --text: #1c1b19;
+  --text-muted: #6b6862;
+  --border: #e4e0d6;
+  --brand: #0f6e56;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-header__accent {
+  color: var(--brand);
+}
+
+.app-header__subtitle {
+  color: var(--text-muted);
+  margin: 8px 0 24px;
+  font-size: 15px;
+}
+
+.status-text {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.pokemon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(28, 27, 25, 0.08);
+}
+
+.pokemon-card__number {
+  align-self: flex-start;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pokemon-card__sprite {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+}
+
+.pokemon-card__name {
+  font-size: 15px;
+  text-transform: capitalize;
+  margin: 6px 0;
+}
+
+.pokemon-card__types {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #1c1b19cc;
+  text-transform: capitalize;
+}
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+}
+
+.search-bar input:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.search-bar button {
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--text);
+  color: var(--surface);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.search-error {
+  color: #b3402f;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* ---- Modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 27, 25, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: 20px;
+  border-top: 6px solid var(--accent);
+  padding: 32px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: none;
+  font-size: 22px;
+  color: var(--text-muted);
+}
+
+.modal__number {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.modal__sprite {
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+}
+
+.modal__name {
+  font-size: 24px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+}
+
+.modal__meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.modal__meta-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal__stats {
+  text-align: left;
+  margin-top: 16px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 32px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.stat-row__label {
+  text-transform: capitalize;
+  color: var(--text-muted);
+}
+
+.stat-row__track {
+  background: var(--bg);
+  border-radius: 999px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.stat-row__fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.stat-row__value {
+  text-align: right;
+  font-weight: 500;
+}
+
+.load-more {
+  display: block;
+  margin: 32px auto 0;
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+}
+
+.load-more:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.chatbot-placeholder {
+  margin-top: 56px;
+  padding: 28px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.chatbot-placeholder h2 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.chatbot-placeholder__input-mock {
+  display: flex;
+  gap: 8px;
+  max-width: 360px;
+  margin: 16px auto 0;
+}
+
+.chatbot-placeholder__input-mock input,
+.chatbot-placeholder__input-mock button {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.chatbot-placeholder__input-mock input {
+  flex: 1;
+  background: var(--bg);
+}
+
+.chatbot-placeholder__input-mock button {
+  background: var(--bg);
+  color: var(--text-muted);
+}
