@@ -1,10 +1,10 @@
 import { getTypeColor } from '../utils/typeColors';
+import TypeBadge from './TypeBadge';
 
 function PokemonModal({ pokemon, onClose }) {
   if (!pokemon) return null;
 
-  const primaryType = pokemon.types[0].type.name;
-  const accent = getTypeColor(primaryType);
+  const accent = getTypeColor(pokemon.types[0]);
   const number = String(pokemon.id).padStart(3, '0');
 
   return (
@@ -19,50 +19,44 @@ function PokemonModal({ pokemon, onClose }) {
         </button>
 
         <span className="modal__number">#{number}</span>
-        <img
-          className="modal__sprite"
-          src={pokemon.sprites.front_default}
-          alt={pokemon.name}
-        />
+        {pokemon.image ? (
+          <img className="modal__sprite" src={pokemon.image} alt={pokemon.name} />
+        ) : (
+          <div className="modal__sprite">?</div>
+        )}
         <h2 className="modal__name">{pokemon.name}</h2>
 
         <div className="pokemon-card__types" style={{ justifyContent: 'center' }}>
-          {pokemon.types.map((t) => (
-            <span
-              key={t.type.name}
-              className="type-badge"
-              style={{ background: getTypeColor(t.type.name) }}
-            >
-              {t.type.name}
-            </span>
+          {pokemon.types.map((type) => (
+            <TypeBadge key={type} type={type} />
           ))}
         </div>
 
         <div className="modal__meta">
           <div>
             <span className="modal__meta-label">Height</span>
-            <span>{pokemon.height / 10} m</span>
+            <span>{pokemon.height} m</span>
           </div>
           <div>
             <span className="modal__meta-label">Weight</span>
-            <span>{pokemon.weight / 10} kg</span>
+            <span>{pokemon.weight} kg</span>
           </div>
         </div>
 
         <div className="modal__stats">
-          {pokemon.stats.map((s) => (
-            <div key={s.stat.name} className="stat-row">
-              <span className="stat-row__label">{s.stat.name.replace('-', ' ')}</span>
+          {pokemon.stats.map((stat) => (
+            <div key={stat.name} className="stat-row">
+              <span className="stat-row__label">{stat.name.replace('-', ' ')}</span>
               <div className="stat-row__track">
                 <div
                   className="stat-row__fill"
                   style={{
-                    width: `${Math.min(s.base_stat, 150) / 1.5}%`,
+                    width: `${Math.min(stat.value, 150) / 1.5}%`,
                     background: accent,
                   }}
                 />
               </div>
-              <span className="stat-row__value">{s.base_stat}</span>
+              <span className="stat-row__value">{stat.value}</span>
             </div>
           ))}
         </div>

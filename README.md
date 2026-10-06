@@ -1,6 +1,6 @@
 # PokeMind
 
-A Pokedex-style web app built with React and [PokeAPI](https://pokeapi.co/). Browse Pokemon, search by name, and view detailed stats. An AI team advisor feature is planned as the next addition
+A Pokedex-style web app built with React and [PokeAPI](https://pokeapi.co/). Browse Pokemon, search by name, and view detailed stats. An AI team advisor feature is planned as the next addition   
 
 Inspired by [Poké Team Builder](https://poketeambuilder.app/), a similar project that combines Pokemon team building with AI suggestions
 

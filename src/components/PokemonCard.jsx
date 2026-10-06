@@ -1,8 +1,8 @@
 import { getTypeColor } from '../utils/typeColors';
+import TypeBadge from './TypeBadge';
 
 function PokemonCard({ pokemon, onSelect }) {
-  const primaryType = pokemon.types[0].type.name;
-  const accent = getTypeColor(primaryType);
+  const accent = getTypeColor(pokemon.types[0]);
   const number = String(pokemon.id).padStart(3, '0');
 
   return (
@@ -12,26 +12,24 @@ function PokemonCard({ pokemon, onSelect }) {
       onClick={() => onSelect(pokemon)}
     >
       <span className="pokemon-card__number">#{number}</span>
-      <img
-        className="pokemon-card__sprite"
-        src={pokemon.sprites.front_default}
-        alt={pokemon.name}
-        loading="lazy"
-      />
+      {pokemon.image ? (
+        <img
+          className="pokemon-card__sprite"
+          src={pokemon.image}
+          alt={pokemon.name}
+          loading="lazy"
+        />
+      ) : (
+        <div className="pokemon-card__sprite">?</div>
+      )}
       <h3 className="pokemon-card__name">{pokemon.name}</h3>
       <div className="pokemon-card__types">
-        {pokemon.types.map((t) => (
-          <span
-            key={t.type.name}
-            className="type-badge"
-            style={{ background: getTypeColor(t.type.name) }}
-          >
-            {t.type.name}
-          </span>
+        {pokemon.types.map((type) => (
+          <TypeBadge key={type} type={type} />
         ))}
       </div>
     </button>
   );
 }
 
-export default PokemonCard;
+export default PokemonCard;  
