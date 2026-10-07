@@ -1,4 +1,4 @@
-import { BASE_URL } from '../config';
+import { BASE_URL, ALL_NAMES_LIMIT } from '../config';
 import { mapPokemon } from './pokemonMapper';
 
 // fetch json and throw a clear error if the request failed
@@ -29,4 +29,14 @@ export async function fetchPokemonPage(limit, offset) {
 export async function fetchPokemonByName(name) {
   const raw = await getJson(`${BASE_URL}/pokemon/${encodeURIComponent(name)}`);
   return mapPokemon(raw);
+}
+
+export async function fetchAllPokemonNames() {
+  const list = await getJson(`${BASE_URL}/pokemon?limit=${ALL_NAMES_LIMIT}`);
+  return list.results.map((entry) => entry.name);
+}
+
+
+export async function fetchPokemonByNames(names) {
+  return Promise.all(names.map((name) => fetchPokemonByName(name)));
 }
